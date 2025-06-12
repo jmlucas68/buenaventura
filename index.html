@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Buenaventura - Doctor Seráfico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #8B4513, #CD853F);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                animation: rotate 20s linear infinite;
+            }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav {
+            background: #34495e;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+            .nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 20px;
+                padding: 10px 20px;
+                border-radius: 25px;
+                transition: all 0.3s ease;
+                display: inline-block;
+            }
+
+                .nav a:hover {
+                    background: #e74c3c;
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+                }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #8B4513;
+            transition: transform 0.3s ease;
+        }
+
+            .section:hover {
+                transform: translateY(-5px);
+            }
+
+            .section h2 {
+                color: #8B4513;
+                font-size: 2.2em;
+                margin-bottom: 20px;
+                text-align: center;
+                position: relative;
+            }
+
+                .section h2::after {
+                    content: '';
+                    display: block;
+                    width: 100px;
+                    height: 3px;
+                    background: linear-gradient(45deg, #8B4513, #CD853F);
+                    margin: 10px auto;
+                    border-radius: 2px;
+                }
+
+        .quote {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 4px solid #CD853F;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+            .quote::before {
+                content: '"';
+                font-size: 4em;
+                color: #CD853F;
+                position: absolute;
+                top: -10px;
+                left: 10px;
+                opacity: 0.3;
+            }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+            .timeline::before {
+                content: '';
+                position: absolute;
+                left: 15px;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background: linear-gradient(to bottom, #8B4513, #CD853F);
+            }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -35px;
+                top: 25px;
+                width: 12px;
+                height: 12px;
+                background: #8B4513;
+                border-radius: 50%;
+                border: 3px solid white;
+                box-shadow: 0 0 0 3px #8B4513;
+            }
+
+        .year {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .work-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #8B4513;
+        }
+
+            .work-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            }
+
+        .work-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 10px;
+        }
+
+        .links {
+            margin-top: 15px;
+        }
+
+            .links a {
+                display: inline-block;
+                margin: 5px 10px 5px 0;
+                padding: 8px 15px;
+                background: linear-gradient(45deg, #8B4513, #CD853F);
+                color: white;
+                text-decoration: none;
+                border-radius: 20px;
+                font-size: 0.9em;
+                transition: all 0.3s ease;
+            }
+
+                .links a:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+                }
+
+        .influences {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .influence-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+            .influence-box h3 {
+                color: #8B4513;
+                margin-bottom: 15px;
+                text-align: center;
+                font-size: 1.4em;
+            }
+
+        .sources {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+            .sources h3 {
+                color: #8B4513;
+                margin-bottom: 15px;
+            }
+
+            .sources ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .sources li {
+                margin-bottom: 10px;
+                padding-left: 20px;
+                position: relative;
+            }
+
+                .sources li::before {
+                    content: '📚';
+                    position: absolute;
+                    left: 0;
+                }
+
+            .sources a {
+                color: #2980b9;
+                text-decoration: none;
+            }
+
+                .sources a:hover {
+                    text-decoration: underline;
+                }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .influences {
+                grid-template-columns: 1fr;
+            }
+
+            .nav a {
+                display: block;
+                margin: 5px 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>San Buenaventura</h1>
+            <p class="subtitle">Doctor Seráfico • Ministro General de los Franciscanos • Teólogo y Filósofo Medieval</p>
+        </header>
+
+        <nav class="nav">
+            <a href="#biografia">Biografía</a>
+            <a href="#pensamiento">Pensamiento</a>
+            <a href="#obras">Obras</a>
+            <a href="#influencias">Influencias</a>
+            <a href="#contexto">Contexto</a>
+            <a href="#fuentes">Fuentes</a>
+        </nav>
+
+        <div class="content">
+            <section id="biografia" class="section">
+                <h2>Biografía</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="year">c. 1217-1221</span>
+                        <p>Juan de Fidanza nace en Bagnoregio, cerca de Viterbo, Italia. Según la leyenda, siendo niño enfermó gravemente y fue curado por intercesión de San Francisco de Asís, quien exclamó "O buona ventura!" (¡Oh buena fortuna!), de donde derivaría su nombre religioso.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">c. 1235</span>
+                        <p>Ingresa en la Universidad de París, donde estudia artes liberales y teología. Allí conoce a Alejandro de Hales, quien se convertiría en su maestro y guía espiritual.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">c. 1243</span>
+                        <p>Ingresa en la Orden Franciscana y toma el nombre de Buenaventura. Continúa sus estudios teológicos bajo la dirección de Alejandro de Hales.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1248</span>
+                        <p>Recibe el título de Maestro en Teología y comienza a enseñar en la Universidad de París, donde desarrolla su sistema filosófico-teológico.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1257</span>
+                        <p>Es elegido Ministro General de la Orden Franciscana a los 35 años, cargo que desempeñará durante 17 años, reformando y organizando la orden.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1273</span>
+                        <p>Es nombrado Cardenal-Obispo de Albano por el Papa Gregorio X, participando activamente en el Segundo Concilio de Lyon.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">15 julio 1274</span>
+                        <p>Muere en Lyon durante el concilio. Es canonizado en 1482 por Sixto IV y declarado Doctor de la Iglesia en 1588 por Sixto V.</p>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    <p>"Contempla la bondad de Dios, admira su belleza, abraza su amor"</p>
+                    <div class="quote-author">- San Buenaventura</div>
+                </div>
+            </section>
+
+            <section id="pensamiento" class="section">
+                <h2>Pensamiento Filosófico y Teológico</h2>
+
+                <h3>Agustinismo Franciscano</h3>
+                <p>San Buenaventura desarrolló un sistema filosófico basado en el agustinismo, adaptado a la espiritualidad franciscana. Su pensamiento se caracteriza por la síntesis entre fe y razón, privilegiando siempre la dimensión espiritual y mística del conocimiento.</p>
+
+                <div class="quote">
+                    <p>"La filosofía no es otra cosa que la sabiduría de Dios participada al hombre para que le conduzca al conocimiento de Dios"</p>
+                    <div class="quote-author">- Itinerarium mentis in Deum</div>
+                </div>
+
+                <h3>Teoría del Conocimiento</h3>
+                <p>Para Buenaventura, el conocimiento humano requiere de la iluminación divina. Distingue tres ojos del alma: el carnal (conocimiento sensible), el racional (conocimiento intelectual) y el contemplativo (conocimiento místico).</p>
+
+                <div class="quote">
+                    <p>"Como el ojo corporal no puede ver sin la luz del sol, así el ojo del alma no puede contemplar las verdades eternas sin la luz de Dios"</p>
+                    <div class="quote-author">- De mysterio Trinitatis</div>
+                </div>
+
+                <h3>Teología Mística</h3>
+                <p>Su mística se centra en el itinerario del alma hacia Dios a través de seis etapas de contemplación, desde las criaturas hasta la unión extática con la divinidad.</p>
+
+                <div class="quote">
+                    <p>"Bienaventurado aquel a quien Dios enseña por sí mismo, no por figuras y palabras que pasan, sino infundiendo directamente la verdad en el alma"</p>
+                    <div class="quote-author">- Itinerarium mentis in Deum</div>
+                </div>
+
+                <h3>Cristología Franciscana</h3>
+                <p>Desarrolla una cristología centrada en el amor y la pobreza de Cristo, viendo en la Encarnación el acto supremo del amor divino hacia la humanidad.</p>
+
+                <div class="quote">
+                    <p>"Cristo es el camino y la puerta, la escalera y el vehículo, como el propiciatorio colocado sobre el arca de Dios"</p>
+                    <div class="quote-author">- Itinerarium mentis in Deum</div>
+                </div>
+            </section>
+
+            <section id="obras" class="section">
+                <h2>Principales Obras</h2>
+
+                <div class="works-grid">
+                    <div class="work-card">
+                        <div class="work-title">Itinerarium mentis in Deum</div>
+                        <p>Su obra maestra espiritual, describe el camino del alma hacia Dios en seis etapas de contemplación. Escrita en el monte Alverna en 1259.</p>
+                        <div class="links">
+                            <a href="https://archive.org/details/sanbuenaventurao00buen" target="_blank">Archive.org</a>
+                            <a href="https://www.amazon.es/Itinerario-mente-hacia-Dios/dp/8422014114" target="_blank">Amazon ES</a>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-title">Breviloquium</div>
+                        <p>Compendio de teología sistemática que presenta toda la doctrina cristiana de forma sintética y ordenada.</p>
+                        <div class="links">
+                            <a href="https://www.amazon.es/Breviloquio-San-Buenaventura/dp/8422013924" target="_blank">Amazon ES</a>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-title">Comentarios a las Sentencias</div>
+                        <p>Extensa obra de cuatro libros comentando las Sentencias de Pedro Lombardo, fundamental para entender su pensamiento teológico.</p>
+                        <div class="links">
+                            <a href="https://www.amazon.es/Comentarios-Sentencias-San-Buenaventura/dp/8479143225" target="_blank">Amazon ES</a>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-title">Legenda maior</div>
+                        <p>Biografía oficial de San Francisco de Asís, que se convirtió en la versión canónica de la vida del santo fundador.</p>
+                        <div class="links">
+                            <a href="https://archive.org/details/legendamaior00buen" target="_blank">Archive.org</a>
+                            <a href="https://www.amazon.es/Leyendas-Francisco-As%C3%ADs-Buenaventura/dp/8422013916" target="_blank">Amazon ES</a>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-title">De mysterio Trinitatis</div>
+                        <p>Tratado sobre el misterio de la Trinidad, donde desarrolla su teología trinitaria desde la perspectiva franciscana.</p>
+                        <div class="links">
+                            <a href="https://www.amazon.es/Disputaciones-misterio-Trinidad-San-Buenaventura/dp/8479142103" target="_blank">Amazon ES</a>
+                        </div>
+                    </div>
+
+                    <div class="work-card">
+                        <div class="work-title">Lignum vitae</div>
+                        <p>Meditación sobre la vida, pasión y glorificación de Jesucristo, estructurada como un árbol de la vida con 48 frutos.</p>
+                        <div class="links">
+                            <a href="https://www.amazon.es/Árbol-vida-San-Buenaventura/dp/8422013908" target="_blank">Amazon ES</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="influencias" class="section">
+                <h2>Influencias Recibidas y Ejercidas</h2>
+
+                <div class="influences">
+                    <div class="influence-box">
+                        <h3>Influencias Recibidas</h3>
+                        <p><strong>San Agustín:</strong> Base fundamental de su pensamiento, especialmente en la teoría de la iluminación y el agustinismo político.</p>
+
+                        <p><strong>San Francisco de Asís:</strong> Espiritualidad franciscana centrada en la pobreza, humildad y amor a Cristo crucificado.</p>
+
+                        <p><strong>Alejandro de Hales:</strong> Su maestro directo en París, primer gran teólogo franciscano.</p>
+
+                        <p><strong>Pseudo-Dionisio:</strong> Teología mística y jerarquías celestes, especialmente visible en su Itinerarium.</p>
+
+                        <p><strong>Aristóteles:</strong> Aunque con reservas, utiliza conceptos aristotélicos filtrados por la tradición agustiniana.</p>
+                    </div>
+
+                    <div class="influence-box">
+                        <h3>Influencias Ejercidas</h3>
+                        <p><strong>Escuela Franciscana:</strong> Sus discípulos Juan Peckham, Mateo de Aquasparta y Pedro de Juan Olivi continuaron su pensamiento.</p>
+
+                        <p><strong>Mística Medieval:</strong> Influyó en místicos como Raimundo Lulio, Meister Eckhart y la escuela renana.</p>
+
+                        <p><strong>Teología Posterior:</strong> Su síntesis agustiniano-franciscana marcó la teología medieval tardía.</p>
+
+                        <p><strong>Renacimiento:</strong> Sus obras fueron estudiadas por humanistas como Pico della Mirandola.</p>
+
+                        <p><strong>Época Moderna:</strong> Su pensamiento influyó en la escuela de Salamanca y en la teología barroca.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contexto" class="section">
+                <h2>Contexto Histórico y Filosófico</h2>
+
+                <h3>Siglo XIII: El Renacimiento Medieval</h3>
+                <p>San Buenaventura vivió en el siglo XIII, período de gran efervescencia intelectual conocido como el "Renacimiento del siglo XII" extendido. Este siglo se caracterizó por:</p>
+
+                <ul style="margin: 20px 0; padding-left: 30px;">
+                    <li><strong>Fundación de las Universidades:</strong> París, Oxford, Bolonia se convierten en centros del saber.</li>
+                    <li><strong>Recepción de Aristóteles:</strong> Las traducciones del árabe revolucionan el pensamiento occidental.</li>
+                    <li><strong>Órdenes Mendicantes:</strong> Franciscanos y dominicos renuevan la vida religiosa y académica.</li>
+                    <li><strong>Síntesis Escolástica:</strong> Integración de la filosofía aristotélica con la teología cristiana.</li>
+                </ul>
+
+                <h3>Controversias Intelectuales</h3>
+                <p>Buenaventura participó en las grandes controversias de su tiempo:</p>
+
+                <div class="quote">
+                    <p>"Los que sitúan toda la certeza del conocimiento humano en los sentidos, viven verdaderamente como bestias"</p>
+                    <div class="quote-author">- Contra el aristotelismo radical</div>
+                </div>
+
+                <p><strong>Contra el Aristotelismo Radical:</strong> Se opuso a los maestros de artes que defendían la eternidad del mundo y la unidad del intelecto.</p>
+
+                <p><strong>Debate con Santo Tomás:</strong> Aunque respetándose mutuamente, representaron dos escuelas distintas: la agustiniana franciscana y la aristotélica dominica.</p>
+
+                <h3>La Universidad de París</h3>
+                <p>En la Universidad de París, Buenaventura vivió momentos cruciales como la huelga de 1229-1231 y las tensiones entre el clero secular y las órdenes mendicantes. Su defensa de los mendicantes fue fundamental para el desarrollo de la teología franciscana.</p>
+            </section>
+
+            <section id="fuentes" class="section">
+                <h2>Fuentes y Referencias</h2>
+
+                <div class="sources">
+                    <h3>Fuentes Primarias</h3>
+                    <ul>
+                        <li><a href="https://www.documentacatholicaomnia.eu/03d/1221-1274,_Sanctus_Bonaventura,_Opera_Omnia,_MLT.pdf" target="_blank">Opera Omnia - Documentación Católica</a></li>
+                        <li><a href="https://archive.org/details/sanbuenaventurao00buen" target="_blank">Obras de San Buenaventura - Internet Archive</a></li>
+                    </ul>
+
+                    <h3>Estudios Académicos</h3>
+                    <ul>
+                        <li><a href="https://www.academia.edu/search?q=San%20Buenaventura" target="_blank">Artículos sobre San Buenaventura - Academia.edu</a></li>
+                        <li><a href="https://es.wikipedia.org/wiki/Buenaventura_de_Bagnoregio" target="_blank">San Buenaventura - Wikipedia</a></li>
+                        <li><a href="https://www.britannica.com/biography/Saint-Bonaventure" target="_blank">Saint Bonaventure - Britannica</a></li>
+                    </ul>
+
+                    <h3>Recursos Especializados</h3>
+                    <ul>
+                        <li><a href="https://www.franciscanos.org/esfa/buen.html" target="_blank">San Buenaventura - Portal Franciscano</a></li>
+                        <li><a href="https://www.vatican.va/content/benedict-xvi/es/audiences/2010/documents/hf_ben-xvi_aud_20100303.html" target="_blank">Audiencia de Benedicto XVI sobre San Buenaventura</a></li>
+                        <li><a href="https://plato.stanford.edu/entries/bonaventure/" target="_blank">Bonaventure - Stanford Encyclopedia of Philosophy</a></li>
+                    </ul>
+
+                    <h3>Bibliografía Recomendada</h3>
+                    <ul>
+                        <li>Gilson, Étienne. <em>La filosofía en la Edad Media</em>. Madrid: Gredos, 2007.</li>
+                        <li>McGrath, Alister E. <em>Teología Franciscana</em>. Barcelona: CLIE, 2005.</li>
+                        <li>Merino, José Antonio. <em>Historia de la Filosofía Franciscana</em>. Madrid: BAC, 1993.</li>
+                        <li>Ratzinger, Joseph. <em>La teología de la historia de San Buenaventura</em>. Madrid: Encuentro, 2004.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling para los enlaces de navegación
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Efecto de hover para las secciones
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animación de aparición gradual
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar la animación a las secciones
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
